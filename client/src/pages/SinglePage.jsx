@@ -9,41 +9,40 @@ const SinglePage = () => {
   const fetchTask = async () => {
     try {
       const response = await fetch(`http://localhost:8080/api/v1/task/${id}`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
 
       if (response.ok) {
         const result = await response.json();
-        console.log(result);
-        setTask(result); 
+        setTask(result);
       } else {
-        throw new Error('Failed to fetch task');
+        throw new Error("Failed to fetch task");
       }
     } catch (error) {
       console.error(error);
     }
   };
-  
+
   const handleDelete = async () => {
     try {
-      const shouldDelete = window.confirm('Are you sure you want to delete?');
+      const shouldDelete = window.confirm("Are you sure you want to delete?");
       if (!shouldDelete) {
         return;
       }
       const response = await fetch(`http://localhost:8080/api/v1/task/${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
 
       if (response.ok) {
-        navigate('/');
+        navigate("/");
       } else {
-        throw new Error('Failed to delete task');
+        throw new Error("Failed to delete task");
       }
     } catch (error) {
       console.error(error);
@@ -53,9 +52,25 @@ const SinglePage = () => {
   useEffect(() => {
     fetchTask();
   }, [id]);
+  const formatDate = (dateTime) => {
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    return new Date(dateTime).toLocaleDateString(undefined, options);
+  };
 
+  const formatTime = (dateTime) => {
+    const options = {
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    };
+    return new Date(dateTime).toLocaleTimeString(undefined, options);
+  };
   if (!task) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
 
   const { image, heading, date, description } = task[0];
@@ -70,21 +85,28 @@ const SinglePage = () => {
             alt={image}
           />
           <p className="text-4xl font-semibold">{heading}</p>
-          <p className="flex items-center mt-1 gap-2 text-slate-600 text-sm">
-            {date}
-          </p>
           <p className="text-slate-800">
             <span className="font-semibold text-black">Description - </span>
             {description}
           </p>
+          <div className="flex gap-5">
+            <p className=" mt-1  text-slate-600 text-md">
+              Date: {formatDate(date)}
+            </p>
+            <p className=" mt-1  text-slate-600 text-md">
+              Time: {formatTime(date)}
+            </p>
+          </div>
+
           <div className="flex gap-4">
-            <Link className="bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md" to={`/update-task/${id}`}>
-              <button >
-                Edit
-              </button>
+            <Link
+              className="bg-green-600 w-full max-w-[200px] text-white text-center p-1 rounded-md"
+              to={`/update-task/${id}`}
+            >
+              <button>Edit</button>
             </Link>
             <button
-              className="bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md"
+              className="bg-red-600 w-full max-w-[200px] text-white text-center p-1 rounded-md"
               onClick={handleDelete}
             >
               Delete

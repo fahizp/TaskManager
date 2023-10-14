@@ -63,7 +63,6 @@ const UpdateTask = () => {
         priority,
         date: currentDateTime.toISOString(),
       };
-      console.log(form);
       setLoading(true);
       try {
         const response = await fetch(`http://localhost:8080/api/v1/task/${id}`, {

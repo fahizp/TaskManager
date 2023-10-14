@@ -1,4 +1,4 @@
-import ListingItem from "../components/TaskCard";
+import TaskCard from "../components/TaskCard";
 import { useEffect, useState } from "react";
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
         const result = await response.json();
 
         if (result) {
-          setAllTasks(result.reverse());
+          setAllTasks(result);
         }
       }
     } catch (err) {
@@ -37,7 +37,7 @@ const Home = () => {
       ? allTasks
       : allTasks.filter((task) => task.priority === selectedPriority);
   return (
-    <section className="max-w-7xl mx-auto">
+    <section className="w-full mx-20">
       <div className="mt-10 flex flex-col items-center text-center ">
         <h1 className="font-extrabold text-[#083a5e] text-[60px] max-w-[800px] ">
           Welcome to Task Manager{" "}
@@ -45,7 +45,9 @@ const Home = () => {
           Workload
         </h1>
         <p className="mt-4 font-medium text-[#497696] text-[18px] max-w-[800px]">
-        We provide a user-friendly platform to efficiently manage tasks with image and priority management capabilities. Please note, while we strive to offer a seamless user experience.
+          We provide a user-friendly platform to efficiently manage tasks with
+          image and priority management capabilities. Please note, while we
+          strive to offer a seamless user experience.
         </p>
       </div>
       <div className="  flex flex-col gap-8 my-10">
@@ -73,7 +75,7 @@ const Home = () => {
       <div className="flex flex-wrap gap-5">
         {filteredTasks &&
           filteredTasks.map((task, index) => (
-            <ListingItem key={index} task={task} />
+            <TaskCard key={index} task={task} />
           ))}
       </div>
     </section>
