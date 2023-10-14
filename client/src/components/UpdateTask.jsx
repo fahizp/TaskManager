@@ -65,13 +65,16 @@ const UpdateTask = () => {
       };
       setLoading(true);
       try {
-        const response = await fetch(`http://localhost:8080/api/v1/task/${id}`, {
-          method: "PUT",
-          body: JSON.stringify(form),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          `http://localhost:8080/api/v1/task/${id}`,
+          {
+            method: "PUT",
+            body: JSON.stringify(form),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         await response.json();
         alert("Success");
@@ -85,9 +88,9 @@ const UpdateTask = () => {
       alert("Please update with proper details");
     }
   };
-const handleRemoveImage = () => {
-  setImage("")
-}
+  const handleRemoveImage = () => {
+    setImage("");
+  };
   return (
     <main className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">Edit Task</h1>
@@ -149,7 +152,6 @@ const handleRemoveImage = () => {
               id="images"
               name="image"
               accept="image/*"
-              
             />
             <button
               type="button"
@@ -161,21 +163,21 @@ const handleRemoveImage = () => {
             </button>
           </div>
           {image !== "" && (
-  <div className='flex justify-between p-3 border items-center'>
-    <img
-      src={`../../public/upload/${image}`}
-      alt='listing image'
-      className='w-20 h-20 object-contain rounded-lg'
-    />
-    <button
-      type='button'
-      onClick={handleRemoveImage}
-      className='p-3 text-red-700 rounded-lg uppercase hover:opacity-75'
-    >
-      Delete
-    </button>
-  </div>
-)}
+            <div className="flex justify-between p-3 border items-center">
+              <img
+                src={`../../public/upload/${image}`}
+                alt="listing image"
+                className="w-20 h-20 object-contain rounded-lg"
+              />
+              <button
+                type="button"
+                onClick={handleRemoveImage}
+                className="p-3 text-red-700 rounded-lg uppercase hover:opacity-75"
+              >
+                Delete
+              </button>
+            </div>
+          )}
 
           <button
             disabled={loading || uploading}

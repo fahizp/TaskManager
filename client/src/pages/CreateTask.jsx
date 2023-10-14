@@ -26,14 +26,14 @@ const CreateTask = () => {
       setUploading(true);
       const formData = new FormData();
       formData.append("file", file[0]);
-  
+
       try {
         const response = await fetch("http://localhost:8080/api/v1/upload", {
           method: "POST",
           body: formData,
         });
         const data = await response.json();
-        setImage(data); 
+        setImage(data);
         setUploading(false);
       } catch (error) {
         console.error("Error uploading image:", error);
@@ -41,11 +41,10 @@ const CreateTask = () => {
       }
     }
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (heading && description && image && priority) {
       const form = {
         heading,
@@ -59,12 +58,12 @@ const CreateTask = () => {
       try {
         const response = await fetch("http://localhost:8080/api/v1/task", {
           method: "POST",
-          body: JSON.stringify(form), 
+          body: JSON.stringify(form),
           headers: {
-            'Content-Type': 'application/json' 
-          }
+            "Content-Type": "application/json",
+          },
         });
-  
+
         await response.json();
         alert("Success");
         navigate("/");
@@ -76,50 +75,50 @@ const CreateTask = () => {
     } else {
       alert("Please update with proper details");
     }
-  }
+  };
   const handleRemoveImage = () => {
-    setImage("")
-  }
+    setImage("");
+  };
   return (
     <main className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">
         Create a Listing
       </h1>
       <form className="flex flex-col sm:flex-row gap-4" onSubmit={handleSubmit}>
-      <div className="flex flex-col gap-4 flex-1">
-      <input
-        type="text"
-        placeholder="Heading"
-        className="border p-3 rounded-lg"
-        id="heading"
-        name="heading"
-        maxLength="62"
-        minLength="10"
-        required
-        onChange={(e) => setHeading(e.target.value)} 
-      />
-      <textarea
-        type="text"
-        placeholder="Description"
-        className="border p-3 rounded-lg"
-        id="description"
-        name="description"
-        required
-        onChange={(e) => setDescription(e.target.value)} // Corrected onChange usage
-      />
-      <div>
-        <p className="font-semibold">Select Priority:</p>
-        <select
-          className="block w-auto py-4 px-4 border rounded-lg shadow-sm"
-          onChange={(e) => setPriority(e.target.value)} // Corrected onChange usage
-          name="priority"
-        >
-          <option value="High">High</option>
-          <option value="Medium">Medium</option>
-          <option value="Low">Low</option>
-        </select>
-      </div>
-    </div>
+        <div className="flex flex-col gap-4 flex-1">
+          <input
+            type="text"
+            placeholder="Heading"
+            className="border p-3 rounded-lg"
+            id="heading"
+            name="heading"
+            maxLength="62"
+            minLength="10"
+            required
+            onChange={(e) => setHeading(e.target.value)}
+          />
+          <textarea
+            type="text"
+            placeholder="Description"
+            className="border p-3 rounded-lg"
+            id="description"
+            name="description"
+            required
+            onChange={(e) => setDescription(e.target.value)} // Corrected onChange usage
+          />
+          <div>
+            <p className="font-semibold">Select Priority:</p>
+            <select
+              className="block w-auto py-4 px-4 border rounded-lg shadow-sm"
+              onChange={(e) => setPriority(e.target.value)} // Corrected onChange usage
+              name="priority"
+            >
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+        </div>
         <div className="flex flex-col flex-1 gap-4">
           <p className="font-semibold">
             Date:
@@ -154,21 +153,21 @@ const CreateTask = () => {
             </button>
           </div>
           {image !== "" && (
-  <div className='flex justify-between p-3 border items-center'>
-    <img
-      src={`../../public/upload/${image}`}
-      alt='listing image'
-      className='w-20 h-20 object-contain rounded-lg'
-    />
-    <button
-      type='button'
-      onClick={handleRemoveImage}
-      className='p-3 text-red-700 rounded-lg uppercase hover:opacity-75'
-    >
-      Delete
-    </button>
-  </div>
-)}
+            <div className="flex justify-between p-3 border items-center">
+              <img
+                src={`../../public/upload/${image}`}
+                alt="listing image"
+                className="w-20 h-20 object-contain rounded-lg"
+              />
+              <button
+                type="button"
+                onClick={handleRemoveImage}
+                className="p-3 text-red-700 rounded-lg uppercase hover:opacity-75"
+              >
+                Delete
+              </button>
+            </div>
+          )}
           <button
             disabled={loading || uploading}
             className="p-3 bg-[#33B89F] text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
