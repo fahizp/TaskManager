@@ -100,7 +100,7 @@ const SinglePage = () => {
 
           <div className="flex gap-4">
             <Link
-              className="bg-green-600 w-full max-w-[200px] text-white text-center p-1 rounded-md"
+              className="bg-[#33B89F] w-full max-w-[200px] text-white text-center p-1 rounded-md"
               to={`/update-task/${id}`}
             >
               <button>Edit</button>

@@ -43,7 +43,7 @@ export default function ListingItem({ task }) {
             </p>
           </div>
 
-          <div className={"border w-16 px-3 bg-black "}>
+          <div className={"border w-20 px-3 py-1 bg-[#33B89F] "}>
             <p className="text-sm text-white line-clamp-2 ">{task.priority}</p>
           </div>
         </div>

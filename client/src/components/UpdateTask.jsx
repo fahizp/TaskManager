@@ -179,7 +179,7 @@ const handleRemoveImage = () => {
 
           <button
             disabled={loading || uploading}
-            className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+            className="p-3 bg-[#33B89F] text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
           >
             {loading ? "Updating..." : "Update Task"}
           </button>

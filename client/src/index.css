@@ -2,3 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.new_gradient {
+    background-image: linear-gradient(to right bottom, #07a3b2, #00a7b0, #01abae, #0fafaa, #1fb3a6, #41b9a4, #59bfa3, #6dc5a2, #8dcfa7, #a9d8af, #c2e2ba, #d9ecc7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
